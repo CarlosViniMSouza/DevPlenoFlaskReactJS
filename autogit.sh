@@ -1,4 +1,4 @@
 git add -A
-git commit -m "data - arqs convert p/ .csv"
+git commit -m "readme.md -> atualizado"
 git push
 git status
