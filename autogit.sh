@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Back-End - API integrada"
+git commit -m "Front-End - iniciado com ViteJS"
 git push
 git status
