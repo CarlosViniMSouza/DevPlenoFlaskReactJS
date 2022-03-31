@@ -1,0 +1,8 @@
+API do BC: https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json&dataInicial=01/01/2000&dataFinal=31/12/2100
+
+
+No arquivo tem a descrição do teste, com as 2 planilhas de input. Uma delas gostaríamos de ver como você trataria os dados, assim avaliamos o uso do Pandas. Por isso o sufixo “com tratativa”, para quem não está muito habituado será mais difícil de usar. Pode escolher e manter apenas uma no código final, ok?
+
+Qualquer dúvida, só entrar em contato!
+
+OBS.: A api retorna no máximo, 266 dicionarios.
