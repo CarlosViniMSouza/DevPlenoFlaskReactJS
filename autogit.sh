@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Back-End -> atualizacoes: setup_data.py => added | main.py => alts added "
+git commit -m "Back-End -> em andamento"
 git push
 git status
