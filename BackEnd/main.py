@@ -1,4 +1,5 @@
 from asyncio.windows_events import NULL
+from multiprocessing import reduction
 from setup_data import somatorio
 from flask import Flask, request
 import requests
@@ -6,6 +7,11 @@ import requests
 app = Flask(__name__)
 
 url_api = 'https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados'
+
+
+@app.route("/")
+def welcome():
+    return "Welcome!"
 
 
 @app.route("/valor_total", methods=['GET'])

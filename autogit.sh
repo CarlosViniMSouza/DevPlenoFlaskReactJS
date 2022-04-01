@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Back-End -> pausa por enquanto (são 00:34h)"
+git commit -m "Back-End -> add welcome() | Front-End -> add gohub_1.0.0"
 git push
 git status
