@@ -5,7 +5,7 @@ import pandas as pd
 table = pd.read_csv("data/table2_ipca2_tratado.csv")
 
 
-class dados:
+class Dados:
     data = table['data']
     valor = table['valor']
 

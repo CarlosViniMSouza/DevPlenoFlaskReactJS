@@ -1,16 +1,11 @@
-from urllib import response
-from setup_data import somatorio, dados
+from asyncio.windows_events import NULL
+from setup_data import somatorio
 from flask import Flask, request
 import requests
 
 app = Flask(__name__)
 
 url_api = 'https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados'
-
-
-class parameters:
-    dataInicio = request.args.get('dataInicio')
-    dataFim = request.args.get('dataFim')
 
 
 @app.route("/valor_total", methods=['GET'])
@@ -26,18 +21,16 @@ def url_api_bc():
     return f"{response}"
 
 
-@app.route("/api_solicitacao/<dataInicio>/<dataFim>", methods=['POST'])
-def apiSolicitacao():
-    pass
+@app.route("/api_solicitacao/<dataInicio>/<dataFim>", methods=['GET', 'POST'])
+def apiSolicitacao(dataInicio, dataFim):
+    dataInicio = request.args.get('dataInicio', type=dict)
+    dataFim = request.args.get('dataFim', type=dict)
 
+    if (dataFim != NULL):
+        exit
 
-"""
-    for i in range(0, len(dados.data)):
-        if (dados.data[i] == response.keys()):
-            return dados.data
-        else:
-            return 'Not Found'
-"""
+    response = requests.get(f"{url_api}/{dataInicio}/{dataFim}").json()
+    return f"{response}"
 
 
 if __name__ == '__main__':
