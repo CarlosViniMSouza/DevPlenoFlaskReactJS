@@ -4,4 +4,4 @@ venv
 idea
 
 # files
-__pycache__
+__pycache__npm-debug.log
