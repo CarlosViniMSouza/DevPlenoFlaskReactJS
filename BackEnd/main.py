@@ -7,7 +7,7 @@ from HelloApiHandler import HelloApiHandler
 
 
 app = Flask(__name__, static_url_path='',
-            static_folder='../FrontEnd/desafiodevpleno/')
+            static_folder='../FrontEnd/desafiodevpleno')
 
 api = Api(app)
 info = dados()
