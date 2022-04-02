@@ -1,4 +1,4 @@
 git add .
-git commit -m "README -> link FrontEnd add"
+git commit -m "static.json -> add"
 git push
 git status
