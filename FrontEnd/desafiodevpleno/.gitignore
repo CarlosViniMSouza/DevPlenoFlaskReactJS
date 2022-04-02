@@ -70,3 +70,4 @@ Thumbs.db
 node_modules
 temp
 releases
+npm-debug.log
