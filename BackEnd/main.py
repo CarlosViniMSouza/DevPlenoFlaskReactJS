@@ -1,45 +1,39 @@
-from asyncio.windows_events import NULL
-from multiprocessing import reduction
-from setup_data import somatorio
-from flask import Flask, request
-import requests
+from flask import Flask, jsonify, request
+from flask_restful import Resource, Api
 
+# criando um app flask
 app = Flask(__name__)
+# criando uma API objeto
+api = Api(app)
 
-url_api = 'https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados'
-
-
-@app.route("/")
-def welcome():
-    return "Welcome!"
+# tornando uma classe para um recurso especifico os metodos get, post correspondem a solicitacoes get e post eles sao mapeados automaticamente por flask_restful. Outros metodos incluem put, delete, etc.
 
 
-@app.route("/valor_total", methods=['GET'])
-def valorTotal():
-    sum = somatorio()
-    return f"Valor Total Arrecadado = R${sum}"
+class Hello(Resource):
+
+    # corresponde a solicitacao GET.
+    # esta função e chamada sempre que ha um pedido GET para este recurso
+    def get(self):
+        return jsonify({'message': 'hello world'})
+
+    # Corresponde a POST
+    def post(self):
+        data = request.get_json()
+        return jsonify({'data': data}), 201
 
 
-@app.route("/api")
-# retorna os dados que pegamos na API
-def url_api_bc():
-    response = requests.get(f"{url_api}").json()
-    return f"{response}"
+# outro recurso para calcular o quadrado de um número
+class Square(Resource):
+
+    def get(self, num):
+        return jsonify({'square': num})
 
 
-@app.route("/api_solicitacao/<dataInicio>/<dataFim>", methods=['GET', 'POST'])
-def apiSolicitacao(dataInicio, dataFim):
-    dataInicio = request.args.get('dataInicio', type=dict)
-    dataFim = request.args.get('dataFim', type=dict)
-
-    if (dataFim != NULL):
-        exit
-
-    response = requests.get(f"{url_api}/{dataInicio}/{dataFim}").json()
-    return f"{response}"
+# adicionando os recursos definidos junto com seus URLs correspondentes
+api.add_resource(Hello, '/')
+api.add_resource(Square, '/square/<int:num>')
 
 
+# executar
 if __name__ == '__main__':
-    app.run()
-
-# run command in bash: python -m flask run
+    app.run(debug=True)
