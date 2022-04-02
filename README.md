@@ -4,4 +4,4 @@
 
 URL BACK-END = `adicionar logo`
 
-URL FRONT-END = `adicionar logo`
+URL FRONT-END = https://carlosvinimsouza.github.io/DevPlenoFlaskReactJS/FrontEnd/desafiodevpleno/index.html (GitHub Pages)

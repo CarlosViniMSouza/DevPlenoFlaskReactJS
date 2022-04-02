@@ -1,4 +1,4 @@
 git add .
-git commit -m "Front-End -> proj ViteJS OK | scss folder delete"
+git commit -m "README -> link FrontEnd add"
 git push
 git status
