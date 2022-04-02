@@ -9,7 +9,7 @@ import requests
 
 
 app = Flask(__name__, static_url_path='',
-            static_folder='../FrontEnd/desafiodevpleno')
+            static_folder='../BackEnd/templates')
 CORS(app)
 
 api = Api(app)
@@ -27,7 +27,7 @@ URL = requests.get(
 
 @app.route("/")
 def servidor():
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory(app.static_folder, 'setup.html')
 
 
 @app.route("/somatorio")
