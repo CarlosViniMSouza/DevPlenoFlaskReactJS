@@ -1,4 +1,4 @@
 git add .
-git commit -m "main.py -> add link Heroku | App.jsx & index.html & package.json -> update"
+git commit -m "package.json -> add for heroku"
 git push
 git status
