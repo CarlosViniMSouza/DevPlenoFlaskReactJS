@@ -1,35 +1,67 @@
-from flask import Flask, request
-from flask_restful import Resource, Api
-from requests import put, get
+# Full Example to Docs
+from flask import Flask
+from flask_restful import reqparse, abort, Api, Resource
+from setup_data import dados
 
 app = Flask(__name__)
 api = Api(app)
+
+TODOS = {
+    'todo1': {'task': 'build an API'},
+    'todo2': {'task': '?????'},
+    'todo3': {'task': 'profit!'},
+}
+
 URL = 'https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados'
-todos = {}
+
+info = dados()
 
 
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
+# route of welcome
+@app.route("/")
+def welcome():
+    return "<h2>Welcome<h2>"
 
 
-class TodoSimple(Resource):
+@app.route("/somatorio")
+def somatorio():
+    return f"<p>A soma dos valores eh = ${info}</p>"
+
+
+def abort_if_todo_doesnt_exist(todo_id):
+    if todo_id not in TODOS:
+        abort(404, message=f"Todo {todo_id} doesn't exist")
+
+
+parser = reqparse.RequestParser()
+parser.add_argument('task')
+
+
+# Todo
+# shows a single todo item
+class Todo(Resource):
     def get(self, todo_id):
-        return {todo_id: todos[todo_id]}
-
-    def put(self, todo_id):
-        todos[todo_id] = request.form['data']
-        return {todo_id: todos[todo_id]}
+        abort_if_todo_doesnt_exist(todo_id)
+        return TODOS[todo_id]
 
 
-api.add_resource(HelloWorld, '/')
-api.add_resource(TodoSimple, '/<string:todo_id>')
+# TodoList - shows a list of all todos, and lets you POST to add new tasks
+class TodoList(Resource):
+    def get(self):
+        return TODOS
+
+    def post(self):
+        args = parser.parse_args()
+        todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
+        todo_id = 'todo%i' % todo_id
+        TODOS[todo_id] = {'task': args['task']}
+        return TODOS[todo_id], 201
+
+
+# Actually setup the Api resource routing here
+api.add_resource(TodoList, '/todos')
+api.add_resource(Todo, '/todos/<todo_id>')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-"""
-1. O principal bloco de construção fornecido pelo Flask-RESTful são os recursos(Resource). Os recursos são criados com base nas visualizações conectáveis do Flask, oferecendo acesso fácil a vários métodos HTTP apenas definindo métodos em seu recurso.
-
-2. Flask-RESTful entende vários tipos de valores de retorno de métodos de exibição. Semelhante ao Flask, você pode retornar qualquer iterável e ele será convertido em uma resposta, incluindo objetos de resposta brutos do Flask. O Flask-RESTful também oferece suporte à configuração do código de resposta e dos cabeçalhos de resposta usando vários valores de retorno.
-"""

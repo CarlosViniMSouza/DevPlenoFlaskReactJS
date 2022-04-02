@@ -1,17 +1,14 @@
 # Bibliotecas:
 import pandas as pd
-
-# Inserindo dados:
-table = pd.read_csv("data/table2_ipca2_tratado.csv")
+import requests
 
 
-class Dados:
-    data = table['data']
-    valor = table['valor']
+def dados():
+    tabela = requests.get(
+        'https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json').json()
 
+    dfTabela = pd.DataFrame(tabela)
 
-def somatorio():
-    # Somando valores:
-    tab = table['valor']
-    total = tab.sum()
-    return total
+    soma = [float(string) for string in dfTabela['valor']]
+
+    return (round(sum(soma), 2))
