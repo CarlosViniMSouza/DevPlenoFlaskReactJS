@@ -2,6 +2,9 @@
 venv
 .vscode
 idea
+node_modules
 
 # files
 __pycache__npm-debug.log
+package-lock.json
+__pycache__

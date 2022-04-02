@@ -1,4 +1,4 @@
 git add .
-git commit -m "package.json -> add for heroku"
+git commit -m "Back-End -> problems fix"
 git push
 git status

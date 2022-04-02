@@ -1,19 +1,9 @@
-# Full Example to Docs
-from flask import Flask, send_from_directory
-from flask_restful import Api
-from flask_cors import CORS
-from HelloApiHandler import HelloApiHandler
-from setup_data import dados
+"""
+from flask import Flask
 import pandas as pd
 import requests
 
-
-app = Flask(__name__, static_url_path='',
-            static_folder='../FrontEnd/desafiodevpleno')
-CORS(app)
-
-api = Api(app)
-info = dados()
+app = Flask(__name__)
 
 dataIni = "01/01/2000"
 dataFim = "01/01/2002"
@@ -26,13 +16,8 @@ URL = requests.get(
 
 
 @app.route("/")
-def servidor():
-    return send_from_directory(app.static_folder, 'index.html')
-
-
-@app.route("/somatorio")
-def somatorio():
-    return f"<p>A soma de todos os valores eh = ${info}</p>"
+def welcome():
+    return "<h2>Hello!</h2>"
 
 
 @app.route("/requisicao", methods=['GET'])
@@ -47,8 +32,6 @@ def valor_resp():
     return f"<p>A soma dos valores entre {dataIni} e {dataFim} eh = R${round(sum(soma), 2)}</p>"
 
 
-api.add_resource(HelloApiHandler, '/flask/hello')
-
-
-if __name__ == '__main__':
+if __name__ == '__app__':
     app.run(debug=True)
+"""
