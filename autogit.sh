@@ -1,4 +1,4 @@
 git add .
-git commit -m "Back-End -> check templates folder => coligar com main.py"
+git commit -m "README -> Link add"
 git push
 git status
